@@ -4,15 +4,12 @@ import { User } from "./UserModel";
 import {Medication} from "./MedicationModel";
 import {Customer} from "./CustomerModel";
 
-// Define the database path globally
 const databasePath = './database.db';
 
-// Define the database connection globally
 let db: Database;
 
 export async function initDatabase(): Promise<void> {
     try {
-        // Open database connection
         db = await open({
             filename: databasePath,
             driver: sqlite3.Database,
@@ -53,18 +50,6 @@ export async function initDatabase(): Promise<void> {
             createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
             updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP
         )`);
-
-//         // Drop the 'medications' table
-//         await db.exec(`DROP TABLE IF EXISTS medications`);
-//
-// // Drop the 'users' table
-//         await db.exec(`DROP TABLE IF EXISTS users`);
-//
-// // Drop the 'customers' table
-//         await db.exec(`DROP TABLE IF EXISTS customers`);
-
-
-
 
 
         // Insert dummy users if table is empty
@@ -121,13 +106,10 @@ export async function initDatabase(): Promise<void> {
 // Function to query user from the database based on username
 export async function queryUserByUsername(username: string): Promise<User | undefined> {
     try {
-        // Query user by username
         const query = 'SELECT * FROM users WHERE username = ?';
         const userRow = await db.get(query, username);
 
-        // Check if user exists
         if (userRow) {
-            // Map database row to User object
             const user: User = {
                 id: userRow.id,
                 name: userRow.name,
@@ -138,23 +120,19 @@ export async function queryUserByUsername(username: string): Promise<User | unde
             };
             return user;
         } else {
-            return undefined; // User not found
+            return undefined;
         }
     } catch (error) {
         throw error;
     }
 }
 
-// Function to update the user's secretKey field with the token in the database
 export async function querySaveTokenToDatabase(user: User, token: string): Promise<void> {
     try {
-        // Update the user's secretKey field with the token in the database
         const query = 'UPDATE users SET secretKey = ? WHERE id = ?';
         await db.run(query, [token, user.id]);
 
-        console.log('Token saved to database successfully');
     } catch (error) {
-        console.error('Error saving token to database:', error);
         throw error;
     }
 }

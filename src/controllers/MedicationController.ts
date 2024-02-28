@@ -26,7 +26,6 @@ async function handleQuery(req: Request, res: Response, tableName: string) {
         const medications: Medication[] = await db.all(`SELECT * FROM ${tableName}`);
         res.json({ medications });
     } catch (error) {
-        console.error(`Error querying ${tableName}:`, error);
         res.status(500).json({ error: `Error querying ${tableName}` });
     }
 }
@@ -46,7 +45,6 @@ async function handleAddOrUpdate(req: Request, res: Response, tableName: string)
             res.json({ message: 'Medication added successfully' });
         }
     } catch (error) {
-        console.error(`Error modifying medication record in ${tableName}:`, error);
         res.status(500).json({ error: `Error modifying medication record in ${tableName}` });
     }
 }
@@ -58,7 +56,6 @@ async function handleSoftDelete(req: Request, res: Response, tableName: string) 
         await db.run(`UPDATE ${tableName} SET isDeleted = 1 WHERE id = ?`, [id]);
         res.json({ message: 'Medication soft deleted successfully' });
     } catch (error) {
-        console.error(`Error soft deleting medication in ${tableName}:`, error);
         res.status(500).json({ error: `Error soft deleting medication in ${tableName}` });
     }
 }
@@ -70,7 +67,6 @@ async function handleDelete(req: Request, res: Response, tableName: string) {
         await db.run(`DELETE FROM ${tableName} WHERE id = ?`, [id]);
         res.json({ message: 'Medication deleted successfully' });
     } catch (error) {
-        console.error(`Error deleting medication in ${tableName}:`, error);
         res.status(500).json({ error: `Error deleting medication in ${tableName}` });
     }
 }
