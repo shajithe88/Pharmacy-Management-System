@@ -18,7 +18,7 @@ To install and set up the Pharmacy Management System, follow these steps:
 1. Clone the repository:
 
     ```
-    git clone https://github.com/your-username/pharmacy-management-system.git
+    git clone https://github.com/shajithe88/Pharmacy-Management-System.git
     ```
 
 2. Navigate to the project directory:
@@ -33,17 +33,23 @@ To install and set up the Pharmacy Management System, follow these steps:
     yarn install
     ```
 
-4. Set up the database by running the provided SQL scripts.
+4. Rename the example environment file:
 
-5. Create a `.env` file in the project root and add the necessary environment variables, including database connection details and JWT secret.
+    ```
+    mv example.env .env
+    ```
 
-6. Start the server:
+5. Open the `.env` file and add the necessary environment variables, including database connection details and JWT secret.
+
+6. Set up the database by running the provided SQL scripts.
+
+7. Start the server:
 
     ```
     yarn start
     ```
 
-7. The server will start running on the specified port. You can now access the Pharmacy Management System from your web browser.
+8. The server will start running on the specified port. You can now access the Pharmacy Management System from your web browser.
 
 ## Usage
 
@@ -57,22 +63,21 @@ Once the system is set up, you can perform the following actions:
 
 ### Credentials
 - Admin:
-   - Username: admin
-   - Password: admin123
-   - Role: admin
+    - Username: admin
+    - Password: admin123
+    - Role: admin
 - Manager:
-   - Username: manager
-   - Password: manager123
-   - Role: manager
+    - Username: manager
+    - Password: manager123
+    - Role: manager
 - Cashier:
-   - Username: cashier
-   - Password: cashier123
-   - Role: cashier
+    - Username: cashier
+    - Password: cashier123
+    - Role: cashier
 - Owner:
-   - Username: owner
-   - Password: owner123
-   - Role: owner
-
+    - Username: owner
+    - Password: owner123
+    - Role: owner
 
 ## Endpoints
 
